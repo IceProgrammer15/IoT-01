@@ -1,0 +1,15 @@
+{
+	"folders": [		
+		{
+			"path": "esp"
+		},
+		{
+			"path": "web"
+		},
+		{
+			"name": "root",
+			"path": "."
+		},
+	],
+	"settings": {}
+}

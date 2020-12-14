@@ -1,0 +1,133 @@
+html,
+body {
+	display: flex;
+	min-height: 100%;
+	align-items: center;
+	flex-direction: column;
+	font-family: sans-serif;
+	margin: 0;
+
+
+}
+
+
+html{
+background: rgb(216,224,222); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(216,224,222,1) 0%, rgba(174,191,188,1) 22%, rgba(153,175,171,1) 33%, rgba(142,166,162,1) 50%, rgba(130,157,152,1) 67%, rgba(78,92,90,1) 82%, rgba(14,14,14,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(216,224,222,1) 0%,rgba(174,191,188,1) 22%,rgba(153,175,171,1) 33%,rgba(142,166,162,1) 50%,rgba(130,157,152,1) 67%,rgba(78,92,90,1) 82%,rgba(14,14,14,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(216,224,222,1) 0%,rgba(174,191,188,1) 22%,rgba(153,175,171,1) 33%,rgba(142,166,162,1) 50%,rgba(130,157,152,1) 67%,rgba(78,92,90,1) 82%,rgba(14,14,14,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8e0de', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+}
+
+.tgl {
+	display: none;
+
+	&,
+	&:after,
+	&:before,
+	& *,
+	& *:after,
+	& *:before,
+	&+.tgl-btn {
+		box-sizing: border-box;
+
+		&::selection {
+			background: none;
+		}
+	}
+
+	+.tgl-btn {
+		outline: 0;
+		display: block;
+		width: 4em;
+		height: 2em;
+		position: relative;
+		cursor: pointer;
+		user-select: none;
+
+		&:after,
+		&:before {
+			position: relative;
+			display: block;
+			content: "";
+			width: 50%;
+			height: 100%;
+		}
+
+		&:after {
+			left: 0;
+		}
+
+		&:before {
+			display: none;
+		}
+	}
+
+	&:checked+.tgl-btn:after {
+		left: 50%;
+	}
+}
+
+
+.tgl-btn {
+	background: #fbfbfb;
+	border-radius: 2em;
+	padding: 2px;
+	transition: all .4s ease;
+	border: 1px solid #e8eae9;
+
+	&:after {
+		border-radius: 2em;
+		background: #fbfbfb;
+		transition:
+			left .3s cubic-bezier(0.175, 0.885, 0.320, 1.275),
+			padding .3s ease, margin .3s ease;
+		box-shadow:
+			0 0 0 1px rgba(0, 0, 0, .1),
+			0 4px 0 rgba(0, 0, 0, .08);
+	}
+
+	&:hover:after {
+		will-change: padding;
+	}
+
+	&:active {
+		box-shadow: inset 0 0 0 2em #e8eae9;
+
+		&:after {
+			padding-right: .8em;
+		}
+	}
+}
+
+$switch-colors: ("green": #3c675f, "blue": #00c3ff, "orange": #fca644);
+@each $name,$color in $switch-colors{ 
+	.#{$name}{
+		:checked+.tgl-btn{
+		background: $color;
+		}	
+	}
+}
+
+
+
+:checked+.tgl-btn {
+
+	&:active {
+		box-shadow: none;
+
+		&:after {
+			margin-left: -.8em;
+		}
+	}
+}
+
+.f-row{
+	display: flex;
+	flex-direction: row;
+	align-items: center;	
+}
+
+.mr1{
+	margin:1rem;
+}
