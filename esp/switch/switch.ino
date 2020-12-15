@@ -9,7 +9,7 @@
 // SOFTAP WIFI
 const char *ssid = "IOT-TechShare";
 const char *password = "12345678";
-const char *localDomain = "techshare"; // ie: http://techshare.local
+const String *localDomain = "techshare"; // ie: http://techshare.local
 
 
 
