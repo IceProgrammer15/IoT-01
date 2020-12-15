@@ -6,39 +6,45 @@ import {setDigitalPin} from './utils/iotCommands';
 import Switch from "./components/switch";
 
 export default (App) => {
-  const [pin1, setPin1] = useState(false);
-  const [pin2, setPin2] = useState(false);
-  const [pinNumber, setPinNumber] = useState(0);
+
+
+  // GPIO-0, GPOI-1(led), GPIO-2
+  const [digitalState, setPinState] = useState([0,1,0]);
+
+
+  const setPin = (pinNumber, pinState)=>{
+    console.log({pinNumber, pinState});
+      const newState = [...digitalState];
+      newState[pinNumber] = pinState;
+      setPinState(newState);
+  }
+
+
+  const switches = digitalState.map((pinState,index)=>
+    (
+      <div class="f-row">
+      <b class="mr1">{`GPIO-${index}`}</b>
+      <Switch
+        id={`sw${index}`}
+        checked={pinState==1}
+        onChange={(checked) => {
+          setDigitalPin(index, checked?1:0).then(res=>{
+            console.log(res);
+            if(res && !res.error && res.data.state != void 0){              
+              setPin(index,checked?1:0);
+            }
+          });          
+        }}
+      />
+    </div>
+    )
+  );
 
   return (
     <div>
-      <input type='number' value={pinNumber} onChange={(e)=>{setPinNumber(+e.target.value)}}/>
+      
 		<h2 style={{textAlign:'center'}}>ESP8266</h2>
-      <div class="f-row">
-        <b class="mr1">GPIO-0</b>
-        <Switch
-          id="sw1"
-          checked={pin1}
-          onChange={(checked) => {
-            setDigitalPin(pinNumber, checked?1:0).then(res=>{
-              if(!res.error && res.data.state){
-                setPin1(+res.data.state);
-              }
-            });
-            
-          }}
-        />
-      </div>
-
-      <div class="f-row">
-        <b class="mr1">GPIO-2</b>
-
-        <Switch
-          id="sw2"
-          checked={pin2}
-          onChange={(checked) => setPin2(checked)}
-        />
-      </div>
+      {switches}      
     </div>
   );
 };
