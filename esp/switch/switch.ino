@@ -69,14 +69,21 @@ void handleInputs(){
 //--------------------------------------------
 void sendHttpRequest(){
   
-  WiFiClientSecure client;
+// std::unique_ptr<BearSSL::WiFiClientSecure>client(new BearSSL::WiFiClientSecure);
+ //client->setFingerprint(fingerprint);
+
+
+
+WiFiClientSecure client;
   client.setInsecure();
+
+
   
   HTTPClient http;
   http.begin(client, "https://hooks.slack.com/services/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"); //HTTP
   http.addHeader("Content-Type", "application/json");
   
-  String msg = currentValue == 1 ? "Someone snatched your coaster! :mag:" : "False alarm! the coaster is back! :cool:";
+  String msg = currentValue == 1 ? "Someone snatched your coaster! :mag:" : "False alarm! the coaster is back!";
 
   String payload = "{\"username\": \"IOT-Device!\", \"text\": \"" + msg + "\", \"icon_emoji\": \":ghost:\"}";
   
