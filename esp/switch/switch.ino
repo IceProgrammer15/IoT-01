@@ -9,7 +9,7 @@
 // SOFTAP WIFI
 const char *ssid = "IOT-TechShare";
 const char *password = "12345678";
-const char *localDomain = "techshare"; // ie: http://techshare.local
+const String localDomain = "techshare"; // ie: http://techshare.local
 
 
 
@@ -73,7 +73,7 @@ void handleSetPin(){
         int state = server.arg("state").toInt();
         
         pinMode(pin,OUTPUT);
-        digitalWrite(pin, state );
+        analogWrite(pin, state );
         
         server.send(200, "application/json", "{\"state\":"+String(state)+"}");        
       }
@@ -81,7 +81,6 @@ void handleSetPin(){
         server.send(400, "text/plain", "bad request!");
       }
   };
-
 }
 //--------------------------------------------
 void handleRoot() {
