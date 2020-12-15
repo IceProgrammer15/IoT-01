@@ -27,7 +27,7 @@ export const sendRequest = async (url, method, body) => {
 
 export const httpGet = async (url, parameters) => {
     const query = parameters || {};
-    const queryString = Object.keys(parameters).reduce((result, key, index) => {
+    const queryString = Object.keys(query).reduce((result, key, index) => {
         const value = encodeURIComponent(parameters[key])
         const separator = index == 0 && url.indexOf('?') < 0 ? '?' : '&';
         result = `${result}${separator}${key}=${value}`;
