@@ -7,6 +7,9 @@
 #include <ESP8266HTTPClient.h>
 #include <WiFiClientSecure.h>
 
+
+#include "env.h"
+
 // SOFTAP WIFI
 const char *ssid = "IOT-TechShare";
 const char *password = "12345678";
@@ -80,7 +83,7 @@ WiFiClientSecure client;
 
   
   HTTPClient http;
-  http.begin(client, "https://hooks.slack.com/services/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"); //HTTP
+  http.begin(client, slackHookUrl); //HTTP
   http.addHeader("Content-Type", "application/json");
   
   String msg = currentValue == 1 ? "Someone snatched your coaster! :mag:" : "False alarm! the coaster is back!";
