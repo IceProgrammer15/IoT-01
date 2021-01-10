@@ -4,10 +4,10 @@ const clean = require('gulp-clean');
 const gzip = require('gulp-gzip');
 
 
-const destFolder = '../esp/switch/data';
+const destFolder = '../esp/iot/data';
 
 const yarnBuild = ()=>{
-    return run(`yarn build --dest ${destFolder}`).exec();
+    return run(`preact build --no-prerender --no-sw --dest ${destFolder}`).exec();
 }
 
 const cleanup = ()=>{
