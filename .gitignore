@@ -1,2 +1,4 @@
 /build
-esp/switch/data/
+node_modules
+
+env.h
